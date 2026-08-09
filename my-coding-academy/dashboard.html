@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <title>Student Dashboard | CodeAI Academy</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard-container { display: flex; min-height: 90vh; }
+        .sidebar { width: 25%; background: #1e293b; padding: 20px; border-right: 1px solid #334155; }
+        .sidebar ul { list-style: none; }
+        .sidebar li { padding: 12px; margin-bottom: 8px; border-radius: 6px; color: #94a3b8; }
+        .sidebar li:hover, .sidebar li.active { background: rgba(0, 210, 255, 0.15); color: #dee8ffec; font-weight: 600; }
+        .content { width: 75%; padding: 40px; }
+        #lesson-content {
+            background: #0f172a;
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid #1e293b;
+            margin-bottom: 24px;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        #lesson-content h3 {
+            color: #f8fafc;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 1.35rem;
+        }
+        #lesson-content h4 {
+            color: #00d2ff;
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+        #lesson-content ul {
+            padding-left: 20px;
+        }
+        #lesson-content li {
+            margin-bottom: 8px;
+        }
+        #lesson-content code {
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .lesson-panel { background: #0b1220; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .lesson-intro { color: #cbd5e1; line-height: 1.7; margin: 12px 0 18px; }
+        .info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 18px 0; }
+        .info-card { background: #111827; border: 1px solid #243041; border-radius: 10px; padding: 16px; }
+        .info-card h4 { margin-bottom: 10px; color: #00d2ff; }
+        .info-card ul { padding-left: 18px; color: #cbd5e1; line-height: 1.7; }
+        .note-box { background: linear-gradient(135deg, rgba(0, 210, 255, 0.12), rgba(59, 130, 246, 0.08)); border: 1px solid rgba(0, 210, 255, 0.25); border-radius: 10px; padding: 16px; color: #e2e8f0; margin-top: 18px; }
+        .code-box { background: #050b14; border-left: 4px solid #00d2ff; padding: 20px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; overflow-x: auto; white-space: pre; margin-top: 20px; color: #a6e22e; }
+        .mini-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3b8; margin-bottom: 6px; display: block; }
+        @media (max-width: 900px) {
+            .dashboard-container { flex-direction: column; }
+            .sidebar, .content { width: 100%; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h3>Daily Topics</h3>
+            <ul id="lesson-list"></ul>
+        </aside>
+
+        <main class="content">
+            <div id="lesson-content"></div>
+            <div class="lesson-panel">
+                <h2 id="lesson-title">Loading Topic...</h2>
+                <p id="lesson-text" class="lesson-intro"></p>
+                <div class="info-grid">
+                    <section class="info-card">
+                        <span class="mini-label">What you'll learn</span>
+                        <ul id="lesson-objectives"></ul>
+                    </section>
+                    <section class="info-card">
+                        <span class="mini-label">Key ideas</span>
+                        <ul id="lesson-key-points"></ul>
+                    </section>
+                </div>
+                <div class="note-box" id="lesson-note"></div>
+            </div>
+
+            <h3>Daily Python Code Snippet</h3>
+            <pre><code id="code-display" class="language-python"></code></pre>
+        </main>
+    </div>
+
+    <script src="js/course-data.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

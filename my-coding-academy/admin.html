@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal | CodeAI Academy</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { padding: 40px 8%; font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        .admin-container { max-width: 700px; margin: 0 auto; background: #1e293b; padding: 30px; border-radius: 12px; border: 1px solid #334155; }
+        h2 { margin-bottom: 20px; color: #00d2ff; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; color: #94a3b8; }
+        input, textarea { width: 100%; padding: 12px; background: #0f172a; border: 1px solid #334155; border-radius: 6px; color: #f8fafc; font-size: 1rem; }
+        input:focus, textarea:focus { border-color: #00d2ff; outline: none; }
+        textarea { height: 120px; font-family: inherit; }
+        .code-textarea { font-family: 'Courier New', monospace; height: 180px; color: #a6e22e; }
+        .btn-submit { background: #00d2ff; color: #0f172a; border: none; padding: 14px; border-radius: 6px; font-weight: 700; width: 100%; cursor: pointer; font-size: 1rem; transition: 0.3s; }
+        .btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+        .output-box { margin-top: 30px; display: none; }
+        .output-box pre { background: #050b14; padding: 15px; border-radius: 6px; border: 1px solid #334155; overflow-x: auto; font-family: monospace; white-space: pre-wrap; color: #e2e8f0; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h2>🚀 Add Daily Tutorial Topic</h2>
+        <form id="admin-form">
+            <div class="form-group">
+                <label for="topic-id">Unique Day ID (e.g., day-3)</label>
+                <input type="text" id="topic-id" placeholder="day-3" required>
+            </div>
+            <div class="form-group">
+                <label for="topic-title">Topic Title</label>
+                <input type="text" id="topic-title" placeholder="Day 3: Control Flow and Loops" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Topic Description Summary</label>
+                <textarea id="description" placeholder="Write a short summary for your students..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="objectives">What students will learn</label>
+                <textarea id="objectives" placeholder="One objective per line..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="key-points">Key ideas</label>
+                <textarea id="key-points" placeholder="One key idea per line..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="note">Lesson note</label>
+                <textarea id="note" placeholder="Add a helpful reminder for students..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="code-snippet">Python Code Snippet</label>
+                <textarea id="code-snippet" class="code-textarea" placeholder="# Paste your Python code here..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Generate Topic Data Block</button>
+        </form>
+
+        <div id="output-section" class="output-box">
+            <label style="color: #00d2ff;">📋 Generated Code Data Block:</label>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 10px;">Copy this block and paste it directly into your <code>js/course-data.js</code> file array!</p>
+            <pre><code id="json-output"></code></pre>
+            <button onclick="copyToClipboard()" class="btn-submit" style="background: #334155; color: #fff; margin-top: 10px; width: auto; padding: 8px 15px;">Copy to Clipboard</button>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
