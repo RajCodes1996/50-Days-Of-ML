@@ -229,9 +229,81 @@ print(df.describe())
 
 # 4. Select rows and columns by position
 print("\\n--- Using iloc ---")
-print(df.iloc[0])      # First row
-print(df.iloc[0:3])    # First three rows
-print(df.iloc[0, 1])   # First row, second column
-print(df.iloc[:, 1])   # Entire second column`
+        print(df.iloc[0])      # First row
+        print(df.iloc[0:3])    # First three rows
+        print(df.iloc[0, 1])   # First row, second column
+        print(df.iloc[:, 1])   # Entire second column`
+    },
+    {
+        id: "day-6",
+        title: "Day 6: Exploring DataFrame Operations",
+        content: `
+        <h3>Exploring DataFrame Operations</h3>
+        <p>Once you load a dataset, the next step is to quickly explore its structure, size, columns, and basic statistics. These operations help you understand what is inside your data before cleaning or modeling it.</p>
+
+        <h4>Important DataFrame Commands</h4>
+        <ul>
+            <li><code>print(df)</code> - displays the full DataFrame.</li>
+            <li><code>df.head()</code> - shows the first five entries.</li>
+            <li><code>df.shape</code> - returns the number of rows and columns.</li>
+            <li><code>df.columns</code> - lists all column names.</li>
+            <li><code>df.info()</code> - prints dataset information such as data types and non-null counts.</li>
+            <li><code>df.describe()</code> - shows summary statistics for numeric columns.</li>
+            <li><code>df.mean()</code> - calculates the average of numeric columns.</li>
+            <li><code>df.max()</code> - returns the maximum value in each numeric column.</li>
+        </ul>
+
+        <h4>Why These Are Useful</h4>
+        <p>These commands help students and data scientists get a quick understanding of the dataset before they start data cleaning, visualization, or machine learning model building.</p>
+        `,
+        description: "Learn how to explore a DataFrame using common display, summary, and statistics commands.",
+        objectives: [
+            "Print a DataFrame and preview its rows",
+            "Check dataset shape and column names",
+            "Use info(), describe(), mean(), and max() for quick analysis"
+        ],
+        keyPoints: [
+            "head() gives the first five rows",
+            "shape tells rows and columns",
+            "columns lists the DataFrame headers",
+            "info(), describe(), mean(), and max() reveal dataset details"
+        ],
+        note: "These operations are often the first step after loading a dataset because they give a fast summary of the data.",
+        codeSnippet: `# Importing Pandas
+import pandas as pd
+
+# Sample dataset
+data = {
+    "hours_studied": [5, 8, 10, 12, 15],
+    "marks": [50, 60, 70, 80, 90]
+}
+
+df = pd.DataFrame(data)
+
+# 1. Print the full DataFrame
+print(df)
+
+# 2. Show first five entries
+print("\\n The first five entries are: ", df.head())
+
+# 3. Show dataset shape
+print("\\n The shape of the dataset is: ", df.shape)
+
+# 4. Show columns
+print("\\n The columns of the dataset are: ", df.columns)
+
+# 5. Show dataset info
+print("\\n The dataset info is: ")
+df.info()
+
+# 6. Show dataset description
+print("\\n The dataset description is : ")
+print(df.describe())
+
+# 7. Show averages
+print("\\n The Average : ", df.mean())
+
+# 8. Show max values
+print("\\n The max value is : ", df.max())`
     },
 ];
