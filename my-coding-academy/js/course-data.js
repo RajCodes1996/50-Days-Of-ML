@@ -134,24 +134,57 @@ print(df)`
         title: "Day 4: Load Your Dataset (CSV)",
         content: `
         <h3>Load Your Dataset (CSV)</h3>
-        <p>CSV files are one of the easiest ways to store datasets. Once loaded, you can inspect the data and prepare it for analysis or machine learning.</p>
-    `,
-        description: "CSV files are one of the easiest ways to store datasets. Once loaded, you can inspect the data and prepare it for analysis or machine learning.",
+        <p>CSV stands for <strong>Comma-Separated Values</strong>. It is a simple file format used to store tabular data, where each row represents one record and each column stores one type of information.</p>
+
+        <h4>CSV Structure</h4>
+        <ul>
+            <li>The first row usually contains column names, also called headers.</li>
+            <li>Each row after the header contains one data entry.</li>
+            <li>Values are separated by commas.</li>
+            <li>CSV files usually end with the <code>.csv</code> extension.</li>
+        </ul>
+
+        <h4>Example Dataset: <code>students.csv</code></h4>
+        <pre style="background:#090d16; color:#00d2ff; padding:12px; border-radius:6px;">
+student_name,hours_studied,marks
+Anika,5,50
+Rahul,8,60
+Meera,10,70
+Kabir,12,80
+Sara,15,90</pre>
+
+        <h4>How Pandas Reads CSV Data</h4>
+        <p>When you use <code>pd.read_csv("students.csv")</code>, Pandas converts the CSV file into a DataFrame. The headers become column names, and each data row becomes a DataFrame row.</p>
+
+        <h4>Expected Output for <code>df.head()</code></h4>
+        <pre style="background:#090d16; color:#00d2ff; padding:12px; border-radius:6px;">
+  student_name  hours_studied  marks
+0        Anika              5     50
+1        Rahul              8     60
+2        Meera             10     70
+3        Kabir             12     80
+4         Sara             15     90</pre>
+        `,
+        description: "Learn what CSV files are, how tabular datasets are structured, and how to load a CSV file into Pandas.",
         objectives: [
             "Understand what a CSV file is",
-            "Load a file into pandas",
-            "Check that the data loaded correctly"
+            "Recognize headers, rows, and columns in a dataset",
+            "Load a CSV file into Pandas",
+            "Check that the data loaded correctly with head()"
         ],
         keyPoints: [
             "CSV stands for comma-separated values",
+            "Headers become DataFrame column names",
+            "Each CSV row becomes one DataFrame row",
             "Use read_csv() to load the file",
             "Always check the output with head()"
         ],
-        note: "If your file does not load, double-check the filename and make sure it is in the same folder as your Python script.",
-        codeSnippet: `import pandas as pd
+        note: "If your file does not load, double-check the filename, extension, and folder location. A tiny spelling mistake like student.csv instead of students.csv can cause an error.",
+        codeSnippet: `# Importing Pandas
+import pandas as pd
 
-# Load the CSV file
-df = pd.read_csv('your_file.csv')
+# Load the CSV file into a DataFrame
+df = pd.read_csv("students.csv")
 
 # View the first 5 rows
 print(df.head())`
@@ -229,10 +262,10 @@ print(df.describe())
 
 # 4. Select rows and columns by position
 print("\\n--- Using iloc ---")
-        print(df.iloc[0])      # First row
-        print(df.iloc[0:3])    # First three rows
-        print(df.iloc[0, 1])   # First row, second column
-        print(df.iloc[:, 1])   # Entire second column`
+print(df.iloc[0])      # First row
+print(df.iloc[0:3])    # First three rows
+print(df.iloc[0, 1])   # First row, second column
+print(df.iloc[:, 1])   # Entire second column`
     },
     {
         id: "day-6",
@@ -305,5 +338,61 @@ print("\\n The Average : ", df.mean())
 
 # 8. Show max values
 print("\\n The max value is : ", df.max())`
+    },
+    {
+        id: "day-7",
+        title: "Day 7: Handling Missing Values",
+        content: `
+        <h3>Handling Missing Values in DataFrames</h3>
+        <p>Real-world datasets often contain missing values. In Pandas, missing values are usually shown as <code>NaN</code>, and they must be handled before analysis or machine learning.</p>
+
+        <h4>What Happens in This Example?</h4>
+        <ul>
+            <li>The <code>marks</code> column has two missing values written as <code>None</code>.</li>
+            <li>Pandas treats those missing values as <code>NaN</code>.</li>
+            <li><code>df["marks"].mean()</code> calculates the average of available marks.</li>
+            <li><code>fillna()</code> replaces missing marks with that average.</li>
+        </ul>
+
+        <h4>Expected Output</h4>
+        <pre style="background:#090d16; color:#00d2ff; padding:12px; border-radius:6px;">
+   hours_studied      marks
+0              5  50.000000
+1              8  60.000000
+2             10  70.000000
+3             12  60.000000
+4             15  60.000000</pre>
+
+        <h4>Why This Matters</h4>
+        <p>Many machine learning models cannot work properly with missing values. Filling missing values with the mean is a simple and common first technique for numerical columns.</p>
+        `,
+        description: "Learn how to find and replace missing values in a DataFrame using fillna() and mean().",
+        objectives: [
+            "Understand how missing values appear in Pandas",
+            "Use mean() to calculate a replacement value",
+            "Use fillna() to replace missing values"
+        ],
+        keyPoints: [
+            "None values become NaN in Pandas",
+            "mean() ignores missing values by default",
+            "fillna() replaces missing values with a chosen value",
+            "Handling missing values is part of data cleaning"
+        ],
+        note: "Mean replacement works well as a beginner-friendly technique for numerical data, but later you can also learn median, mode, dropping rows, and model-based imputation.",
+        codeSnippet: `# Importing Pandas
+import pandas as pd
+
+# Dataset with missing marks
+data = {
+    "hours_studied": [5, 8, 10, 12, 15],
+    "marks": [50, 60, 70, None, None]
+}
+
+df = pd.DataFrame(data)
+
+# Replace missing values in marks with the average marks
+df["marks"] = df["marks"].fillna(df["marks"].mean())
+
+print(df)`
     },
 ];
