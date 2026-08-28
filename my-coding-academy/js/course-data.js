@@ -395,4 +395,92 @@ df["marks"] = df["marks"].fillna(df["marks"].mean())
 
 print(df)`
     },
+    {
+        id: "day-8",
+        title: "Day 8: Data Visualization with Matplotlib",
+        content: `
+        <h3>Data Visualization with Matplotlib</h3>
+        <p>Data visualization helps us understand patterns in a dataset faster than looking at numbers alone. In this lesson, we clean missing marks, save the dataset as a CSV file, and create a scatter plot showing the relationship between study hours and marks.</p>
+
+        <h4>What This Code Does</h4>
+        <ul>
+            <li>Creates a small student dataset using <code>hours_studied</code> and <code>marks</code>.</li>
+            <li>Fills missing marks using the average mark value.</li>
+            <li>Saves the cleaned DataFrame as <code>students_data.csv</code>.</li>
+            <li>Uses <code>plt.scatter()</code> to draw a graph of marks against study hours.</li>
+        </ul>
+
+        <h4>Graph Preview: Marks vs Hours Studied</h4>
+        <svg viewBox="0 0 520 300" role="img" aria-label="Scatter plot showing marks increasing as hours studied increase" style="width:100%; max-width:640px; background:#090d16; border:1px solid #1e293b; border-radius:8px; padding:14px;">
+            <line x1="58" y1="236" x2="470" y2="236" stroke="#94a3b8" stroke-width="2"></line>
+            <line x1="58" y1="236" x2="58" y2="36" stroke="#94a3b8" stroke-width="2"></line>
+            <text x="210" y="282" fill="#cbd5e1" font-size="15">hours_studied</text>
+            <text x="8" y="132" fill="#cbd5e1" font-size="15" transform="rotate(-90 16 132)">marks</text>
+            <text x="155" y="24" fill="#f8fafc" font-size="18" font-weight="700">Marks Vs Hours Studied</text>
+            <circle cx="90" cy="196" r="7" fill="#00d2ff"></circle>
+            <circle cx="178" cy="156" r="7" fill="#00d2ff"></circle>
+            <circle cx="236" cy="116" r="7" fill="#00d2ff"></circle>
+            <circle cx="294" cy="156" r="7" fill="#38bdf8"></circle>
+            <circle cx="382" cy="156" r="7" fill="#38bdf8"></circle>
+            <text x="78" y="256" fill="#94a3b8" font-size="12">5</text>
+            <text x="168" y="256" fill="#94a3b8" font-size="12">8</text>
+            <text x="224" y="256" fill="#94a3b8" font-size="12">10</text>
+            <text x="284" y="256" fill="#94a3b8" font-size="12">12</text>
+            <text x="372" y="256" fill="#94a3b8" font-size="12">15</text>
+            <text x="28" y="200" fill="#94a3b8" font-size="12">50</text>
+            <text x="28" y="160" fill="#94a3b8" font-size="12">60</text>
+            <text x="28" y="120" fill="#94a3b8" font-size="12">70</text>
+            <text x="290" y="144" fill="#cbd5e1" font-size="12">filled mean</text>
+        </svg>
+
+        <h4>Why This Matters</h4>
+        <p>Scatter plots are useful in AI and machine learning because they reveal relationships between two numeric variables. Here, students can see how marks generally change as study hours increase.</p>
+        `,
+        description: "Learn how to clean missing data, export a CSV file, and visualize a DataFrame using a scatter plot.",
+        objectives: [
+            "Fill missing values before visualization",
+            "Save cleaned data using to_csv()",
+            "Create a scatter plot with Matplotlib",
+            "Understand the relationship between hours studied and marks"
+        ],
+        keyPoints: [
+            "fillna() prepares missing values for plotting",
+            "to_csv() exports the cleaned dataset",
+            "scatter() compares two numeric columns",
+            "xlabel(), ylabel(), and title() make graphs easier to understand"
+        ],
+        note: "In notebooks, plt.show() displays the graph output. In regular Python scripts, it opens the Matplotlib graph window.",
+        codeSnippet: `# Importing required libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+from IPython.display import FileLink, display
+
+# Dataset with missing values
+data = {
+    "hours_studied": [5, 8, 10, 12, 15],
+    "marks": [50, 60, 70, None, None]
+}
+
+df = pd.DataFrame(data)
+
+# Fill missing marks with the average marks
+df["marks"] = df["marks"].fillna(df["marks"].mean())
+
+# Export cleaned data to a CSV file
+df.to_csv("students_data.csv", index=False)
+print("CSV file generated successfully!")
+
+# Display the cleaned DataFrame
+print(df)
+
+# Display a downloadable CSV link in Jupyter Notebook
+display(FileLink("students_data.csv"))
+
+# Visualization
+plt.scatter(df["hours_studied"], df["marks"])
+plt.xlabel("hours_studied")
+plt.ylabel("marks")
+plt.title("Marks Vs Hours_studied")
+plt.show()`
+    },
 ];
