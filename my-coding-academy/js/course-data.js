@@ -684,4 +684,122 @@ grouped_summary = df.groupby("category")["marks"].agg(["mean", "min", "max", "co
 print("Grouped summary:")
 print(grouped_summary)`
     },
+    {
+        id: "practice-day-1-10",
+        title: "Practice: Day 1 to Day 10 Review",
+        content: `
+        <h3>Practice Problem: Student Performance Analysis</h3>
+        <p>This practice challenge combines everything from Day 1 to Day 10. You will create a dataset, handle missing values, inspect it, engineer a new feature, sort it, group it, export it, and visualize it.</p>
+
+        <h4>Your Task</h4>
+        <ul>
+            <li>Create variables for a small student dataset.</li>
+            <li>Build a Pandas DataFrame with <code>name</code>, <code>hours_studied</code>, <code>marks</code>, and <code>category</code>.</li>
+            <li>Handle missing marks using the column mean.</li>
+            <li>Inspect the data using <code>head()</code>, <code>shape</code>, <code>columns</code>, <code>info()</code>, and <code>describe()</code>.</li>
+            <li>Create a new feature called <code>performance_score</code>.</li>
+            <li>Filter students whose marks are greater than 60.</li>
+            <li>Sort students by marks in descending order.</li>
+            <li>Group students by category and calculate average marks.</li>
+            <li>Save the final DataFrame as a CSV file.</li>
+            <li>Create a scatter plot of <code>hours_studied</code> vs <code>marks</code>.</li>
+        </ul>
+
+        <h4>Concepts Covered</h4>
+        <ul>
+            <li>Variables and data types</li>
+            <li>Creating DataFrames</li>
+            <li>Creating and loading CSV files</li>
+            <li>Inspecting DataFrames</li>
+            <li>Handling missing values</li>
+            <li>Data visualization</li>
+            <li>Feature engineering</li>
+            <li>Sorting and grouping data</li>
+        </ul>
+
+        <h4>Expected Learning Outcome</h4>
+        <p>After completing this practice, students should be able to perform a beginner-level data analysis workflow from raw data creation to cleaned output and visualization.</p>
+        `,
+        description: "Practice the complete beginner Pandas workflow from Day 1 to Day 10 in one student performance project.",
+        objectives: [
+            "Review variables, data types, and DataFrames",
+            "Practice CSV creation and loading",
+            "Handle missing values and inspect data",
+            "Apply filtering, sorting, grouping, and visualization"
+        ],
+        keyPoints: [
+            "A full data workflow starts with clean structured data",
+            "Missing values must be handled before analysis",
+            "Feature engineering creates more useful columns",
+            "Sorting, grouping, and plots help reveal patterns"
+        ],
+        note: "Encourage students to first solve the task on their own, then compare their work with the reference solution.",
+        codeSnippet: `# Day 1 to Day 10 Practice Problem
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# 1. Create variables and raw data
+course_name = "AIML Beginner Practice"
+passing_marks = 60
+
+data = {
+    "name": ["Raj", "Shaam", "Vinod", "Anika", "Meera"],
+    "hours_studied": [5, 8, 10, 12, 15],
+    "marks": [50, 60, 70, None, 90],
+    "category": ["avg", "good", "excellent", "good", "excellent"]
+}
+
+# 2. Create a DataFrame
+df = pd.DataFrame(data)
+print("Course:", course_name)
+print("Original DataFrame:")
+print(df)
+
+# 3. Handle missing values
+df["marks"] = df["marks"].fillna(df["marks"].mean())
+print("\\nAfter handling missing values:")
+print(df)
+
+# 4. Inspect the DataFrame
+print("\\nFirst five rows:")
+print(df.head())
+print("\\nDataset shape:", df.shape)
+print("\\nDataset columns:", df.columns)
+print("\\nDataset info:")
+df.info()
+print("\\nDataset description:")
+print(df.describe())
+
+# 5. Feature engineering
+df["performance_score"] = df["marks"] * 2
+df["passed"] = df["marks"] >= passing_marks
+print("\\nAfter feature engineering:")
+print(df)
+
+# 6. Filter rows
+high_scorers = df[df["marks"] > 60]
+print("\\nStudents with marks greater than 60:")
+print(high_scorers)
+
+# 7. Sort data
+df_sorted = df.sort_values(by="marks", ascending=False)
+print("\\nSorted by marks:")
+print(df_sorted)
+
+# 8. Group data
+grouped_marks = df.groupby("category")["marks"].mean()
+print("\\nAverage marks by category:")
+print(grouped_marks)
+
+# 9. Save final dataset
+df.to_csv("day_1_to_10_practice.csv", index=False)
+print("\\nPractice CSV file generated successfully!")
+
+# 10. Visualize data
+plt.scatter(df["hours_studied"], df["marks"])
+plt.xlabel("hours_studied")
+plt.ylabel("marks")
+plt.title("Practice: Marks Vs Hours Studied")
+plt.show()`
+    },
 ];
