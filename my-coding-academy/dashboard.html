@@ -10,18 +10,18 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         .dashboard-shell { min-height: 100vh; }
-        .dashboard-hero { padding: 34px 7% 22px; border-bottom: 1px solid var(--line); background: rgba(255, 255, 255, 0.035); }
+        .dashboard-hero { padding: 34px 7% 22px; border-bottom: 1px solid var(--line); background: var(--surface); }
         .dashboard-hero h1 { font-size: clamp(2rem, 4vw, 4rem); line-height: 1; margin-bottom: 12px; }
         .dashboard-hero p { max-width: 780px; color: var(--muted); }
         .dashboard-container { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 24px; min-height: 80vh; padding: 28px 7% 52px; }
-        .sidebar { position: sticky; top: 94px; align-self: start; max-height: calc(100vh - 118px); overflow: auto; background: rgba(255, 255, 255, 0.055); padding: 18px; border: 1px solid var(--line); border-radius: 8px; }
+        .sidebar { position: sticky; top: 94px; align-self: start; max-height: calc(100vh - 118px); overflow: auto; background: var(--surface); padding: 18px; border: 1px solid var(--line); border-radius: 8px; }
         .sidebar h3 { margin-bottom: 14px; }
         .sidebar ul { list-style: none; }
         .sidebar li { padding: 12px; margin-bottom: 8px; border-radius: 8px; color: var(--muted); border: 1px solid transparent; }
-        .sidebar li:hover, .sidebar li.active { background: rgba(54, 211, 255, 0.12); border-color: rgba(54, 211, 255, 0.28); color: var(--ink); font-weight: 700; }
+        .sidebar li:hover, .sidebar li.active { background: rgba(54, 211, 255, 0.12); border-color: var(--line-strong); color: var(--ink); font-weight: 700; }
         .content { min-width: 0; }
         #lesson-content {
-            background: rgba(255, 255, 255, 0.055);
+            background: var(--surface);
             padding: 26px;
             border-radius: 8px;
             border: 1px solid var(--line);
@@ -53,10 +53,10 @@
             border-radius: 4px;
             font-family: 'Courier New', Courier, monospace;
         }
-        .lesson-panel { background: rgba(7, 10, 18, 0.72); border: 1px solid var(--line); border-radius: 8px; padding: 24px; margin-bottom: 20px; }
+        .lesson-panel { background: var(--surface-strong); border: 1px solid var(--line); border-radius: 8px; padding: 24px; margin-bottom: 20px; }
         .lesson-intro { color: var(--soft); line-height: 1.7; margin: 12px 0 18px; }
         .info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 18px 0; }
-        .info-card { background: #111724; border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+        .info-card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
         .info-card h4 { margin-bottom: 10px; color: var(--cyan); }
         .info-card ul { padding-left: 18px; color: var(--soft); line-height: 1.7; }
         .note-box { background: linear-gradient(135deg, rgba(54, 211, 255, 0.12), rgba(102, 227, 166, 0.1)); border: 1px solid rgba(54, 211, 255, 0.25); border-radius: 8px; padding: 16px; color: var(--soft); margin-top: 18px; }
@@ -79,6 +79,9 @@
         <nav aria-label="Primary navigation">
             <a href="index.html">Home</a>
             <a href="admin.html">Admin</a>
+            <button class="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
+                <span class="theme-icon" aria-hidden="true">☾</span>
+            </button>
         </nav>
     </header>
 
@@ -121,5 +124,6 @@
 
     <script src="js/course-data.js"></script>
     <script src="js/dashboard.js"></script>
+    <script src="js/theme.js"></script>
 </body>
 </html>
