@@ -3,56 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python & AI/ML Academy | Master the Future</title>
+    <title>Rajarshi's AI Academy | 30 Days of AIML</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <header class="navbar">
-        <div class="logo"><i>⚡ Rajarshi's AI Academy</i></div>
-        <nav>
-            <!-- <a href="#features">Features</a>
-            <a href="#curriculum">Curriculum</a> -->
-            <a href="dashboard.html" class="btn-secondary">Lets Go Click Here!</a>
+        <a class="logo" href="index.html" aria-label="Rajarshi's AI Academy home">
+            <span class="logo-mark">AI</span>
+            <span>Rajarshi's AI Academy</span>
+        </a>
+        <nav aria-label="Primary navigation">
+            <a href="#curriculum">Curriculum</a>
+            <a href="#projects">Projects</a>
+            <a href="dashboard.html" class="btn-secondary">Open Lab</a>
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Master Machine Learning <br><span class="highlight">30 Days Of AIML</span> From Scratch</h1>
-            <p>Skip the fluff. Learn Machine Learning through interactive, hands-on coding. Build real-world projects today.</p>
-            <div class="hero-buttons">
-                <a href="dashboard.html" class="btn-primary">Start Learning Now</a>
-                <a href="#curriculum" class="btn-outline">Explore Syllabus</a>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">30 days. Python, data, machine learning, projects.</p>
+                <h1>Learn AIML like you are inside a real data lab.</h1>
+                <p class="hero-copy">Build confidence from Python basics to Pandas workflows, charts, feature engineering, and beginner ML thinking through daily hands-on lessons.</p>
+                <div class="hero-buttons">
+                    <a href="dashboard.html" class="btn-primary">Start today's lesson</a>
+                    <a href="#curriculum" class="btn-outline">View roadmap</a>
+                </div>
+                <div class="trust-row" aria-label="Course highlights">
+                    <span>10+ active lessons</span>
+                    <span>Daily code practice</span>
+                    <span>Beginner friendly</span>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <section id="features" class="features">
-        <h2>Why Learn With Us?</h2>
-        <div class="feature-grid">
-            <div class="card">
-                <div class="icon">💻</div>
-                <h3>Zero Setup Coding</h3>
-                <p>No complex environments to install. Write and run Python code instantly via integrated cloud notebooks.</p>
+            <div class="lab-preview" aria-label="AI learning lab preview">
+                <div class="lab-topbar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <strong>student_model.py</strong>
+                </div>
+                <div class="lab-body">
+                    <div class="code-lines">
+                        <p><span>01</span> import pandas as pd</p>
+                        <p><span>02</span> df = pd.read_csv("students.csv")</p>
+                        <p><span>03</span> df["score"] = model.predict(X)</p>
+                        <p><span>04</span> print(df.head())</p>
+                    </div>
+                    <div class="model-card">
+                        <small>Training signal</small>
+                        <strong>92%</strong>
+                        <div class="bars">
+                            <i style="height: 48%"></i>
+                            <i style="height: 68%"></i>
+                            <i style="height: 58%"></i>
+                            <i style="height: 84%"></i>
+                            <i style="height: 72%"></i>
+                            <i style="height: 92%"></i>
+                        </div>
+                    </div>
+                    <div class="neural-board">
+                        <span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
             </div>
-            <div class="card">
-                <div class="icon">🤖</div>
-                <h3>Real AI Projects</h3>
-                <p>Build real predictive models, neural networks, and applications powered by cutting-edge AI frameworks.</p>
+        </section>
+
+        <section id="features" class="features">
+            <div class="section-heading">
+                <p class="eyebrow">Why it works</p>
+                <h2>Everything feels practical from day one.</h2>
             </div>
-            <div class="card">
-                <div class="icon">📜</div>
-                <h3>Verified Certificate</h3>
-                <p>Earn a shareable milestone digital certificate upon completing your courses and capstone projects.</p>
+            <div class="feature-grid">
+                <article class="card">
+                    <div class="icon">01</div>
+                    <h3>Code-first lessons</h3>
+                    <p>Every topic pairs plain-language explanation with Python snippets students can run, edit, and understand.</p>
+                </article>
+                <article class="card">
+                    <div class="icon">02</div>
+                    <h3>Data science workflow</h3>
+                    <p>Students practice CSV loading, inspection, missing value handling, visualization, sorting, grouping, and feature creation.</p>
+                </article>
+                <article class="card">
+                    <div class="icon">03</div>
+                    <h3>Project momentum</h3>
+                    <p>The course keeps learners moving toward visible outcomes: clean datasets, charts, analysis, and model-ready features.</p>
+                </article>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section id="curriculum" class="roadmap">
+            <div class="section-heading">
+                <p class="eyebrow">Learning path</p>
+                <h2>A realistic AIML roadmap for beginners.</h2>
+            </div>
+            <div class="timeline">
+                <article>
+                    <span>Week 1</span>
+                    <h3>Python foundations</h3>
+                    <p>Variables, data types, clean syntax, and confident code reading.</p>
+                </article>
+                <article>
+                    <span>Week 2</span>
+                    <h3>Pandas and datasets</h3>
+                    <p>Create, load, inspect, clean, and export structured data.</p>
+                </article>
+                <article>
+                    <span>Week 3</span>
+                    <h3>Visualization and features</h3>
+                    <p>Turn data into charts and engineer columns that reveal patterns.</p>
+                </article>
+                <article>
+                    <span>Week 4</span>
+                    <h3>ML project thinking</h3>
+                    <p>Prepare model-ready data and connect the full workflow end to end.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="projects" class="project-band">
+            <div>
+                <p class="eyebrow">Capstone energy</p>
+                <h2>Build a student performance analysis system.</h2>
+                <p>Use real AIML habits: clean the data, inspect the shape, engineer a performance score, group results, export a CSV, and visualize the story.</p>
+            </div>
+            <a href="dashboard.html" class="btn-primary">Enter learning lab</a>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2026 Rajarshi's AI Academy. Built for future developers.</p>
+        <p>&copy; 2026 Rajarshi's AI Academy. Built for future AI builders.</p>
     </footer>
-
 </body>
 </html>
