@@ -131,9 +131,9 @@ print(df)`
     },
     {
         id: "day-4",
-        title: "Day 4: Load Your Dataset (CSV)",
+        title: "Day 4: Create and Load Your Dataset (CSV)",
         content: `
-        <h3>Load Your Dataset (CSV)</h3>
+        <h3>Create and Load Your Dataset (CSV)</h3>
         <p>CSV stands for <strong>Comma-Separated Values</strong>. It is a simple file format used to store tabular data, where each row represents one record and each column stores one type of information.</p>
 
         <h4>CSV Structure</h4>
@@ -144,50 +144,89 @@ print(df)`
             <li>CSV files usually end with the <code>.csv</code> extension.</li>
         </ul>
 
-        <h4>Example Dataset: <code>students.csv</code></h4>
-        <pre style="background:#090d16; color:#00d2ff; padding:12px; border-radius:6px;">
-student_name,hours_studied,marks
-Anika,5,50
-Rahul,8,60
-Meera,10,70
-Kabir,12,80
-Sara,15,90</pre>
+        <h4>Step 1: Create a Dataset in Python</h4>
+        <p>Before loading a CSV, students should understand how a dataset can be created from a Python dictionary. The keys become column names, and the lists become column values.</p>
 
-        <h4>How Pandas Reads CSV Data</h4>
-        <p>When you use <code>pd.read_csv("students.csv")</code>, Pandas converts the CSV file into a DataFrame. The headers become column names, and each data row becomes a DataFrame row.</p>
+        <h4>Step 2: Export the Dataset as <code>students_data.csv</code></h4>
+        <p><code>df.to_csv("students_data.csv", index=False)</code> saves the DataFrame as a CSV file. The <code>index=False</code> part prevents Pandas from adding an extra index column to the file.</p>
 
-        <h4>Expected Output for <code>df.head()</code></h4>
+        <h4>Example CSV File</h4>
         <pre style="background:#090d16; color:#00d2ff; padding:12px; border-radius:6px;">
-  student_name  hours_studied  marks
-0        Anika              5     50
-1        Rahul              8     60
-2        Meera             10     70
-3        Kabir             12     80
-4         Sara             15     90</pre>
+hours_studied,marks
+5,50.0
+8,60.0
+10,70.0
+12,60.0
+15,60.0</pre>
+
+        <h4>Step 3: Load the CSV Again</h4>
+        <p>After creating the CSV file, you can load it back using <code>pd.read_csv("students_data.csv")</code>. This is the usual workflow when working with real datasets.</p>
+
+        <h4>Expected Loaded Data</h4>
+        <pre style="background:#090d16; color:#00d2ff; padding:12px; border-radius:6px;">
+   hours_studied  marks
+0              5   50.0
+1              8   60.0
+2             10   70.0
+3             12   60.0
+4             15   60.0</pre>
+
+        <h4>Optional Visualization</h4>
+        <p>The same cleaned data can also be visualized with a scatter plot to compare <code>hours_studied</code> and <code>marks</code>.</p>
         `,
-        description: "Learn what CSV files are, how tabular datasets are structured, and how to load a CSV file into Pandas.",
+        description: "Learn what CSV files are, how to create one from a DataFrame, and how to load it back into Pandas.",
         objectives: [
             "Understand what a CSV file is",
             "Recognize headers, rows, and columns in a dataset",
-            "Load a CSV file into Pandas",
-            "Check that the data loaded correctly with head()"
+            "Create a CSV file using to_csv()",
+            "Load a CSV file into Pandas using read_csv()",
+            "Visualize CSV data with a simple scatter plot"
         ],
         keyPoints: [
             "CSV stands for comma-separated values",
             "Headers become DataFrame column names",
             "Each CSV row becomes one DataFrame row",
-            "Use read_csv() to load the file",
-            "Always check the output with head()"
+            "to_csv() creates a CSV file from a DataFrame",
+            "read_csv() loads a CSV file into a DataFrame"
         ],
-        note: "If your file does not load, double-check the filename, extension, and folder location. A tiny spelling mistake like student.csv instead of students.csv can cause an error.",
-        codeSnippet: `# Importing Pandas
+        note: "This Day 4 lesson now shows the full beginner workflow: create data, clean it, save it as CSV, load it again, and visualize it.",
+        codeSnippet: `# Importing required libraries
 import pandas as pd
+import matplotlib.pyplot as plt
+from IPython.display import FileLink, display
 
-# Load the CSV file into a DataFrame
-df = pd.read_csv("students.csv")
+# Create a dataset
+data = {
+    "hours_studied": [5, 8, 10, 12, 15],
+    "marks": [50, 60, 70, None, None]
+}
 
-# View the first 5 rows
-print(df.head())`
+df = pd.DataFrame(data)
+
+# Fill missing marks with the average marks
+df["marks"] = df["marks"].fillna(df["marks"].mean())
+
+# Create a CSV file
+df.to_csv("students_data.csv", index=False)
+print("CSV file generated successfully!")
+
+# Print the cleaned DataFrame
+print(df)
+
+# Load the created CSV file again
+loaded_df = pd.read_csv("students_data.csv")
+print("\\nLoaded CSV data:")
+print(loaded_df)
+
+# Display a downloadable CSV link in Jupyter Notebook
+display(FileLink("students_data.csv"))
+
+# Visualization
+plt.scatter(loaded_df["hours_studied"], loaded_df["marks"])
+plt.xlabel("hours_studied")
+plt.ylabel("marks")
+plt.title("Marks Vs Hours_studied")
+plt.show()`
     },
     {
         id: "pandas-inspection",
@@ -482,5 +521,94 @@ plt.xlabel("hours_studied")
 plt.ylabel("marks")
 plt.title("Marks Vs Hours_studied")
 plt.show()`
+    },
+    {
+        id: "day-9",
+        title: "Day 9: Feature Engineering and Sorting Data",
+        content: `
+        <h3>Feature Engineering and Sorting Data</h3>
+        <p>Feature engineering means creating new useful columns from existing data. Sorting helps us arrange data in a meaningful order, such as highest marks first.</p>
+
+        <h4>What This Lesson Covers</h4>
+        <ul>
+            <li><code>df[df["marks"] > 60]</code> filters rows where marks are greater than 60.</li>
+            <li><code>df["performance"] = df["marks"] * 2</code> creates a new feature column.</li>
+            <li><code>sort_values()</code> sorts the DataFrame by a selected column.</li>
+            <li><code>loc</code> updates a specific row and column value.</li>
+            <li><code>fillna()</code> handles missing values after a value is replaced.</li>
+        </ul>
+
+        <h4>Example Output After Feature Engineering</h4>
+        <pre style="background:#090d16; color:#00d2ff; padding:12px; border-radius:6px;">
+    name  hours_studied  marks  performance
+0    Raj              5     50          100
+1  Shaam              8     60          120
+2  Vinod             10     70          140</pre>
+
+        <h4>Why This Matters</h4>
+        <p>In machine learning, raw data is rarely perfect. We often filter important rows, create new columns, sort values, and clean missing values before training a model.</p>
+        `,
+        description: "Learn how to filter rows, create a new feature column, sort data, update values, and handle missing values.",
+        objectives: [
+            "Filter rows using conditions",
+            "Create a new performance feature",
+            "Sort a DataFrame by marks",
+            "Replace and fill missing values"
+        ],
+        keyPoints: [
+            "Filtering selects rows that match a condition",
+            "Feature engineering creates new useful columns",
+            "sort_values() arranges rows by a column",
+            "loc updates a specific cell",
+            "fillna() replaces missing values"
+        ],
+        note: "Feature engineering is a major part of AI and machine learning because better input columns can help models learn better patterns.",
+        codeSnippet: `# Importing Pandas
+import pandas as pd
+
+# Create a sample student dataset
+data = {
+    "name": ["Raj", "Shaam", "Vinod"],
+    "hours_studied": [5, 8, 10],
+    "marks": [50, 60, 70]
+}
+
+df = pd.DataFrame(data)
+
+# Print the original dataset
+print(df)
+print("\\n")
+
+# Filter students with marks greater than 60
+print("Students with marks greater than 60:")
+print(df[df["marks"] > 60])
+print("\\n")
+
+# Feature engineering: create a new column
+df["performance"] = df["marks"] * 2
+
+# Save the dataset with the new column
+df.to_csv("Dataset With New Column.csv", index=False)
+
+print("Dataset with new performance column:")
+print(df)
+print("\\n")
+
+# Sort data by marks in descending order
+df_sorted = df.sort_values(by="marks", ascending=False)
+print("Sorted dataset by marks:")
+print(df_sorted)
+print("\\n")
+
+# Replace one value with a missing value
+df.loc[2, "marks"] = None
+print("Replace Values")
+print(df)
+print("\\n")
+
+# Handle missing values using mean
+df["marks"] = df["marks"].fillna(df["marks"].mean())
+print("Handling Missing Values")
+print(df)`
     },
 ];
