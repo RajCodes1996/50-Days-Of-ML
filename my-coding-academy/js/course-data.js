@@ -611,4 +611,77 @@ df["marks"] = df["marks"].fillna(df["marks"].mean())
 print("Handling Missing Values")
 print(df)`
     },
+    {
+        id: "day-10",
+        title: "Day 10: Grouping Data with Pandas",
+        content: `
+        <h3>Grouping Data with Pandas</h3>
+        <p>Grouping data means splitting rows into categories and calculating useful summaries for each category. In Pandas, we use <code>groupby()</code> for this.</p>
+
+        <h4>What This Lesson Covers</h4>
+        <ul>
+            <li><code>df["category"]</code> adds a new category column to the DataFrame.</li>
+            <li><code>groupby("category")</code> groups rows that have the same category value.</li>
+            <li><code>["marks"].mean()</code> calculates the average marks inside each group.</li>
+            <li>Grouping helps compare performance across different labels like <code>avg</code>, <code>good</code>, and <code>excellent</code>.</li>
+        </ul>
+
+        <h4>Example Grouped Output</h4>
+        <pre style="background:#090d16; color:#00d2ff; padding:12px; border-radius:6px;">
+category
+avg          50.0
+excellent    70.0
+good         60.0
+Name: marks, dtype: float64</pre>
+
+        <h4>More Aggregations</h4>
+        <p>After grouping, you can calculate more than just the mean. Common aggregation functions include <code>sum()</code>, <code>count()</code>, <code>min()</code>, and <code>max()</code>.</p>
+
+        <h4>Why This Matters</h4>
+        <p>In data analysis and machine learning, grouping helps summarize patterns. For example, you can compare average marks by category, average sales by city, or total users by age group.</p>
+        `,
+        description: "Learn how to group rows by category and calculate summary statistics using Pandas groupby().",
+        objectives: [
+            "Add a category column to a DataFrame",
+            "Group rows using groupby()",
+            "Calculate average marks by category",
+            "Use multiple aggregation functions"
+        ],
+        keyPoints: [
+            "groupby() splits data into groups",
+            "mean() calculates the average for each group",
+            "agg() can calculate multiple summaries at once",
+            "Grouping is useful for comparing categories"
+        ],
+        note: "Grouping is one of the most useful Pandas skills because it turns raw rows into meaningful summaries.",
+        codeSnippet: `# Importing Pandas
+import pandas as pd
+
+# Create a sample student dataset
+data = {
+    "name": ["Raj", "Shaam", "Vinod"],
+    "hours_studied": [5, 8, 10],
+    "marks": [50, 60, 70]
+}
+
+df = pd.DataFrame(data)
+
+# Add category labels
+df["category"] = ["avg", "good", "excellent"]
+
+print("Dataset with category column:")
+print(df)
+print("\\n")
+
+# Group by category and calculate average marks
+grouped = df.groupby("category")["marks"].mean()
+print("Average marks by category:")
+print(grouped)
+print("\\n")
+
+# More grouped statistics
+grouped_summary = df.groupby("category")["marks"].agg(["mean", "min", "max", "count"])
+print("Grouped summary:")
+print(grouped_summary)`
+    },
 ];
