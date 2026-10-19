@@ -802,4 +802,88 @@ plt.ylabel("marks")
 plt.title("Practice: Marks Vs Hours Studied")
 plt.show()`
     },
+    {
+        id: "day-11",
+        title: "Day 11: Introduction to NumPy",
+        content: `
+        <h3>Introduction to NumPy</h3>
+        <p>NumPy is a Python library for working with numbers and arrays. It is one of the foundations of data science, machine learning, and scientific computing because it handles numerical data efficiently.</p>
+
+        <h4>What Is a NumPy Array?</h4>
+        <p>A NumPy array is similar to a Python list, but it is designed for fast mathematical operations. Arrays can hold data in one dimension, like a list of marks, or two dimensions, like a table of student data.</p>
+
+        <h4>Why Use NumPy?</h4>
+        <ul>
+            <li>It performs calculations on many values at once.</li>
+            <li>It provides useful functions such as <code>mean()</code>, <code>sum()</code>, <code>min()</code>, and <code>max()</code>.</li>
+            <li>It supports array shapes, dimensions, slicing, and indexing.</li>
+            <li>Libraries such as Pandas, Matplotlib, and scikit-learn use NumPy internally.</li>
+        </ul>
+
+        <h4>Example Array</h4>
+        <pre style="background:#090d16; color:#00d2ff; padding:12px; border-radius:6px;">
+marks = [50, 60, 70, 80, 90]
+np_marks = np.array(marks)
+
+np_marks + 5
+# Output: array([55, 65, 75, 85, 95])</pre>
+
+        <h4>Key Idea: Vectorized Operations</h4>
+        <p>With NumPy, you can add 5 to every mark using one line: <code>np_marks + 5</code>. This is called a vectorized operation and is much cleaner than writing a loop for each value.</p>
+
+        <h4>Why This Matters for AIML</h4>
+        <p>Machine learning models work with numerical arrays. Learning NumPy now makes it easier to understand datasets, matrices, model inputs, and later concepts such as linear algebra.</p>
+        `,
+        description: "Learn the basics of NumPy arrays and use fast numerical operations for data analysis and machine learning.",
+        objectives: [
+            "Import the NumPy library",
+            "Create one-dimensional and two-dimensional arrays",
+            "Use array properties such as shape and dimensions",
+            "Perform basic numerical operations with NumPy"
+        ],
+        keyPoints: [
+            "NumPy arrays store numerical data efficiently",
+            "Vectorized operations work on every array value at once",
+            "shape describes array rows and columns",
+            "NumPy is used throughout data science and machine learning"
+        ],
+        note: "Install NumPy with pip install numpy if it is not already available in your Python environment.",
+        codeSnippet: `# Day 11: Introduction to NumPy
+import numpy as np
+
+# Create a one-dimensional NumPy array
+marks = np.array([50, 60, 70, 80, 90])
+print("Marks array:", marks)
+
+# Inspect the array
+print("Array shape:", marks.shape)
+print("Number of dimensions:", marks.ndim)
+print("Data type:", marks.dtype)
+
+# Basic calculations
+print("Average marks:", marks.mean())
+print("Highest marks:", marks.max())
+print("Total marks:", marks.sum())
+
+# Vectorized operation: add 5 grace marks to each student
+updated_marks = marks + 5
+print("Updated marks:", updated_marks)
+
+# Create a two-dimensional array
+student_data = np.array([
+    [5, 50],
+    [8, 60],
+    [10, 70],
+    [12, 80],
+    [15, 90]
+])
+
+print("\\nStudent data (hours studied, marks):")
+print(student_data)
+print("2D array shape:", student_data.shape)
+
+# Indexing and slicing
+print("First student's data:", student_data[0])
+print("All marks:", student_data[:, 1])`
+    },
 ];
