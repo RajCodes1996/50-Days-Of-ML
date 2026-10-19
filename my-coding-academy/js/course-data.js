@@ -439,87 +439,113 @@ print(df)`
         title: "Day 8: Data Visualization with Matplotlib",
         content: `
         <h3>Data Visualization with Matplotlib</h3>
-        <p>Data visualization helps us understand patterns in a dataset faster than looking at numbers alone. In this lesson, we clean missing marks, save the dataset as a CSV file, and create a scatter plot showing the relationship between study hours and marks.</p>
+        <p>Data visualization helps us understand patterns in a dataset faster than looking at numbers alone. In this lesson, we use a student marks dataset to explore correlation, spot an outlier, and compare scatter, line, bar, and histogram charts.</p>
 
-        <h4>What This Code Does</h4>
+        <h4>What This Lesson Covers</h4>
         <ul>
-            <li>Creates a small student dataset using <code>hours_studied</code> and <code>marks</code>.</li>
-            <li>Fills missing marks using the average mark value.</li>
-            <li>Saves the cleaned DataFrame as <code>students_data.csv</code>.</li>
-            <li>Uses <code>plt.scatter()</code> to draw a graph of marks against study hours.</li>
+            <li><code>df.corr(numeric_only=True)</code> measures how numeric columns relate to each other.</li>
+            <li><code>pd.concat()</code> adds a new student record so we can discuss a possible outlier.</li>
+            <li>A scatter plot compares two numeric values.</li>
+            <li>Line and bar charts make it easier to compare students and their marks.</li>
+            <li>A histogram shows how marks are distributed across score ranges.</li>
         </ul>
 
-        <h4>Graph Preview: Marks vs Hours Studied</h4>
-        <svg viewBox="0 0 520 300" role="img" aria-label="Scatter plot showing marks increasing as hours studied increase" style="width:100%; max-width:640px; background:#090d16; border:1px solid #1e293b; border-radius:8px; padding:14px;">
-            <line x1="58" y1="236" x2="470" y2="236" stroke="#94a3b8" stroke-width="2"></line>
-            <line x1="58" y1="236" x2="58" y2="36" stroke="#94a3b8" stroke-width="2"></line>
-            <text x="210" y="282" fill="#cbd5e1" font-size="15">hours_studied</text>
-            <text x="8" y="132" fill="#cbd5e1" font-size="15" transform="rotate(-90 16 132)">marks</text>
-            <text x="155" y="24" fill="#f8fafc" font-size="18" font-weight="700">Marks Vs Hours Studied</text>
-            <circle cx="90" cy="196" r="7" fill="#00d2ff"></circle>
-            <circle cx="178" cy="156" r="7" fill="#00d2ff"></circle>
-            <circle cx="236" cy="116" r="7" fill="#00d2ff"></circle>
-            <circle cx="294" cy="156" r="7" fill="#38bdf8"></circle>
-            <circle cx="382" cy="156" r="7" fill="#38bdf8"></circle>
-            <text x="78" y="256" fill="#94a3b8" font-size="12">5</text>
-            <text x="168" y="256" fill="#94a3b8" font-size="12">8</text>
-            <text x="224" y="256" fill="#94a3b8" font-size="12">10</text>
-            <text x="284" y="256" fill="#94a3b8" font-size="12">12</text>
-            <text x="372" y="256" fill="#94a3b8" font-size="12">15</text>
-            <text x="28" y="200" fill="#94a3b8" font-size="12">50</text>
-            <text x="28" y="160" fill="#94a3b8" font-size="12">60</text>
-            <text x="28" y="120" fill="#94a3b8" font-size="12">70</text>
-            <text x="290" y="144" fill="#cbd5e1" font-size="12">filled mean</text>
+        <h4>Understanding Correlation and Outliers</h4>
+        <p>Correlation tells us whether two numeric columns tend to change together. A value close to <code>1</code> means a strong positive relationship, while a value close to <code>-1</code> means a strong negative relationship. The new student Zara, with 100 marks, is included as a possible high-value outlier to inspect.</p>
+
+        <h4>Chart Preview</h4>
+        <svg viewBox="0 0 780 510" role="img" aria-label="Four chart previews showing student marks as scatter, line, bar, and histogram charts" style="width:100%; max-width:780px; background:#090d16; border:1px solid #1e293b; border-radius:8px; padding:14px;">
+            <text x="70" y="28" fill="#f8fafc" font-size="17" font-weight="700">Scatter: Hours Studied vs Marks</text>
+            <text x="465" y="28" fill="#f8fafc" font-size="17" font-weight="700">Line: Marks Trend</text>
+            <line x1="65" y1="215" x2="350" y2="215" stroke="#94a3b8" stroke-width="2"></line>
+            <line x1="65" y1="215" x2="65" y2="55" stroke="#94a3b8" stroke-width="2"></line>
+            <circle cx="95" cy="185" r="6" fill="#00d2ff"></circle><circle cx="140" cy="155" r="6" fill="#00d2ff"></circle><circle cx="185" cy="125" r="6" fill="#00d2ff"></circle><circle cx="230" cy="95" r="6" fill="#00d2ff"></circle><circle cx="275" cy="65" r="6" fill="#00d2ff"></circle><circle cx="320" cy="42" r="6" fill="#f59e0b"></circle>
+            <text x="85" y="237" fill="#94a3b8" font-size="11">5</text><text x="132" y="237" fill="#94a3b8" font-size="11">7</text><text x="177" y="237" fill="#94a3b8" font-size="11">9</text><text x="222" y="237" fill="#94a3b8" font-size="11">11</text><text x="267" y="237" fill="#94a3b8" font-size="11">13</text><text x="312" y="237" fill="#f59e0b" font-size="11">15</text>
+            <line x1="450" y1="215" x2="735" y2="215" stroke="#94a3b8" stroke-width="2"></line>
+            <line x1="450" y1="215" x2="450" y2="55" stroke="#94a3b8" stroke-width="2"></line>
+            <polyline points="480,185 525,155 570,125 615,95 660,65 705,42" fill="none" stroke="#38bdf8" stroke-width="3"></polyline>
+            <circle cx="480" cy="185" r="4" fill="#38bdf8"></circle><circle cx="525" cy="155" r="4" fill="#38bdf8"></circle><circle cx="570" cy="125" r="4" fill="#38bdf8"></circle><circle cx="615" cy="95" r="4" fill="#38bdf8"></circle><circle cx="660" cy="65" r="4" fill="#38bdf8"></circle><circle cx="705" cy="42" r="4" fill="#f59e0b"></circle>
+            <text x="95" y="285" fill="#f8fafc" font-size="17" font-weight="700">Bar: Student Marks</text>
+            <text x="490" y="285" fill="#f8fafc" font-size="17" font-weight="700">Histogram: Marks Distribution</text>
+            <line x1="65" y1="475" x2="350" y2="475" stroke="#94a3b8" stroke-width="2"></line>
+            <line x1="65" y1="475" x2="65" y2="310" stroke="#94a3b8" stroke-width="2"></line>
+            <rect x="85" y="405" width="28" height="70" fill="#00d2ff"></rect><rect x="128" y="375" width="28" height="100" fill="#00d2ff"></rect><rect x="171" y="345" width="28" height="130" fill="#00d2ff"></rect><rect x="214" y="315" width="28" height="160" fill="#00d2ff"></rect><rect x="257" y="285" width="28" height="190" fill="#00d2ff"></rect><rect x="300" y="265" width="28" height="210" fill="#f59e0b"></rect>
+            <line x1="450" y1="475" x2="735" y2="475" stroke="#94a3b8" stroke-width="2"></line>
+            <line x1="450" y1="475" x2="450" y2="310" stroke="#94a3b8" stroke-width="2"></line>
+            <rect x="475" y="420" width="42" height="55" fill="#38bdf8"></rect><rect x="523" y="365" width="42" height="110" fill="#38bdf8"></rect><rect x="571" y="365" width="42" height="110" fill="#38bdf8"></rect><rect x="619" y="420" width="42" height="55" fill="#38bdf8"></rect><rect x="667" y="420" width="42" height="55" fill="#38bdf8"></rect>
+            <text x="476" y="496" fill="#94a3b8" font-size="11">50</text><text x="525" y="496" fill="#94a3b8" font-size="11">60</text><text x="573" y="496" fill="#94a3b8" font-size="11">70</text><text x="621" y="496" fill="#94a3b8" font-size="11">80</text><text x="669" y="496" fill="#94a3b8" font-size="11">90+</text>
         </svg>
 
         <h4>Why This Matters</h4>
-        <p>Scatter plots are useful in AI and machine learning because they reveal relationships between two numeric variables. Here, students can see how marks generally change as study hours increase.</p>
+        <p>Different charts answer different questions. Scatter plots reveal relationships, line charts show change, bar charts compare categories, and histograms show the distribution of numeric values.</p>
         `,
-        description: "Learn how to clean missing data, export a CSV file, and visualize a DataFrame using a scatter plot.",
+        description: "Learn correlation, outlier awareness, and four essential Matplotlib charts for exploring student marks data.",
         objectives: [
-            "Fill missing values before visualization",
-            "Save cleaned data using to_csv()",
-            "Create a scatter plot with Matplotlib",
-            "Understand the relationship between hours studied and marks"
+            "Calculate correlation between numeric columns",
+            "Identify a possible outlier in a dataset",
+            "Create scatter, line, bar, and histogram charts",
+            "Choose an appropriate chart for the question being asked"
         ],
         keyPoints: [
-            "fillna() prepares missing values for plotting",
-            "to_csv() exports the cleaned dataset",
-            "scatter() compares two numeric columns",
-            "xlabel(), ylabel(), and title() make graphs easier to understand"
+            "corr() measures relationships between numeric columns",
+            "Outliers are unusually high or low values worth investigating",
+            "scatter(), plot(), bar(), and hist() serve different purposes",
+            "Labels and titles make charts clear and useful"
         ],
-        note: "In notebooks, plt.show() displays the graph output. In regular Python scripts, it opens the Matplotlib graph window.",
-        codeSnippet: `# Importing required libraries
-import pandas as pd
+        note: "A correlation value or a chart pattern can suggest a relationship, but it does not prove that one variable causes the other.",
+        codeSnippet: `# Day 8: Data Visualization, Correlation, and Outliers
 import matplotlib.pyplot as plt
-from IPython.display import FileLink, display
+import numpy as np
+import pandas as pd
 
-# Dataset with missing values
+# Create a student marks dataset
 data = {
-    "hours_studied": [5, 8, 10, 12, 15],
-    "marks": [50, 60, 70, None, None]
+    "name": ["Raj", "Shaam", "Rohit", "Priya", "Neha"],
+    "hours_studied": [5, 7, 9, 11, 13],
+    "marks": [50, 60, 70, 80, 90]
 }
 
 df = pd.DataFrame(data)
 
-# Fill missing marks with the average marks
-df["marks"] = df["marks"].fillna(df["marks"].mean())
+# Finding correlation for numeric columns
+print("Correlation matrix:")
+print(df.corr(numeric_only=True))
 
-# Export cleaned data to a CSV file
-df.to_csv("students_data.csv", index=False)
-print("CSV file generated successfully!")
-
-# Display the cleaned DataFrame
+# Add a possible high-mark outlier
+new_row = {"name": "Zara", "hours_studied": 15, "marks": 100}
+df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
+print("\\nDataset with new row:")
 print(df)
 
-# Display a downloadable CSV link in Jupyter Notebook
-display(FileLink("students_data.csv"))
+# Create a 2 by 2 chart layout
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
 
-# Visualization
-plt.scatter(df["hours_studied"], df["marks"])
-plt.xlabel("hours_studied")
-plt.ylabel("marks")
-plt.title("Marks Vs Hours_studied")
+# Scatter plot
+axes[0, 0].scatter(df["hours_studied"], df["marks"], color="deepskyblue")
+axes[0, 0].set_title("Hours Studied Vs Marks")
+axes[0, 0].set_xlabel("Hours Studied")
+axes[0, 0].set_ylabel("Marks")
+
+# Line plot
+axes[0, 1].plot(df["name"], df["marks"], marker="o", color="mediumseagreen")
+axes[0, 1].set_title("Marks Trend")
+axes[0, 1].set_xlabel("Name")
+axes[0, 1].set_ylabel("Marks")
+
+# Bar chart
+axes[1, 0].bar(df["name"], df["marks"], color="cornflowerblue")
+axes[1, 0].set_title("Student Vs Marks")
+axes[1, 0].set_xlabel("Name")
+axes[1, 0].set_ylabel("Marks")
+
+# Histogram: use numeric marks, not names
+bins = np.arange(45, 106, 10)
+axes[1, 1].hist(df["marks"], bins=bins, color="plum", edgecolor="black")
+axes[1, 1].set_title("Marks Distribution")
+axes[1, 1].set_xlabel("Marks")
+axes[1, 1].set_ylabel("Number of Students")
+
+plt.tight_layout()
 plt.show()`
     },
     {
