@@ -453,6 +453,12 @@ print(df)`
         <h4>Understanding Correlation and Outliers</h4>
         <p>Correlation tells us whether two numeric columns tend to change together. A value close to <code>1</code> means a strong positive relationship, while a value close to <code>-1</code> means a strong negative relationship. The new student Zara, with 100 marks, is included as a possible high-value outlier to inspect.</p>
 
+        <h4>Generated Chart Image</h4>
+        <figure style="margin:16px 0;">
+            <img src="assets/day-8-visualization-charts.png" alt="Four Matplotlib charts showing student marks as scatter, line, bar, and histogram plots" style="display:block; width:100%; max-width:900px; border:1px solid #1e293b; border-radius:8px; background:#ffffff;">
+            <figcaption style="margin-top:8px; color:#94a3b8;">A real Matplotlib output generated from the Day 8 student marks dataset.</figcaption>
+        </figure>
+
         <h4>Chart Preview</h4>
         <svg viewBox="0 0 780 510" role="img" aria-label="Four chart previews showing student marks as scatter, line, bar, and histogram charts" style="width:100%; max-width:780px; background:#090d16; border:1px solid #1e293b; border-radius:8px; padding:14px;">
             <text x="70" y="28" fill="#f8fafc" font-size="17" font-weight="700">Scatter: Hours Studied vs Marks</text>
