@@ -1,65 +1,83 @@
-Codex Task: Improve Day 8 — Data Visualization
-Use a token-efficient workflow and make the changes in the existing Day 8 learning material in this repository.
-Task
-1. Locate the existing Day 8 content and identify the right file(s) to update. Do not create a duplicate lesson if one already exists.
-2. Expand the data-visualization section with clear, beginner-friendly explanations of correlation, outliers, scatter plots, line plots, bar charts, and histograms.
-3. Correct and improve the supplied example below. Explain what each chart is for and how to interpret it.
-4. Add useful graph/chart images or generate chart images from the example if the repository's format and existing workflow support this. Save assets in the project's established location and embed them in the lesson. Prefer real charts generated from code over decorative or misleading images.
-5. Keep the lesson consistent with surrounding Day 8 material, formatting, and the learner's current level. Avoid unrelated changes.
-Important correctness notes
-- A correlation matrix with only one numeric column (marks) does not demonstrate a meaningful relationship between two variables. Use a suitable second numeric variable, such as study hours, if needed, and explain that correlation does not imply causation.
-- name is categorical data, so plt.hist(df["name"]) is incorrect for a marks distribution. Use the numeric marks column for the histogram.
-- A line plot connects observations in an order and can imply continuity. Explain when that is appropriate; for comparing student categories, a bar chart is usually clearer.
-- Adding a student with 100 marks does not by itself prove that the value is an outlier. Explain that outliers need to be assessed relative to the distribution and context.
-- Include readable titles, axis labels, sensible tick labels, and a layout that does not overlap.
-- Do not add numpy or other dependencies unless they are actually used and are not already available.
+# TASK
+ Add the practice excercise in Day-11 Numpy section as practice excericse below the explanation as i want both in Day-11. 
 
-### Starting code
+Since you're learning AIML step by step, our goal isn't just to get predictions. You'll understand what each block does, why each NumPy operation is used, and how the mathematics connects to machine learning.
+Project overview
 
-<!-- #Code -->
-import matplotlib.pyplot as plt
+Project: Student Performance Predictor
+Library: NumPy
+Algorithm: Multiple Linear Regression
+Training method: Gradient Descent
+Prediction: Estimate a student's exam score from study hours, attendance, and previous marks.
+
+#### Complete project code
+
+
 import numpy as np
-import pandas as pd
 
-data = {
-    "name": ["raj", "Shaam", "Rohit", "Priya", "Neha"],
-    "marks": [50,60,70,80,90]
-}
+# BLOCK 1: Generate a synthetic student dataset
+np.random.seed(42)
+n = 300
 
-df = pd.DataFrame(data)
+study_hours = np.random.uniform(0, 10, n)
+attendance = np.random.uniform(50, 100, n)
+previous_marks = np.random.uniform(30, 100, n)
 
-# Finding-Correlation
-print(df.corr(numeric_only=True))
+X = np.column_stack((study_hours, attendance, previous_marks))
+noise = np.random.normal(0, 5, n)
+y = np.clip(
+    5 * study_hours + 0.2 * attendance
+    + 0.5 * previous_marks + noise, 0, 100
+)
 
-# Outliers
-new_row = {"name": "Zara", "marks": 100}
-df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
-print(df)
+# BLOCK 2: Split data into training and testing sets
+indices = np.random.permutation(n)
+split = int(0.8 * n)
+train_idx, test_idx = indices[:split], indices[split:]
 
-# Scatter-Plot
-plt.scatter(df["name"], df["marks"])
-plt.xlabel("name")
-plt.ylabel("marks")
-plt.title("Student Names Vs Marks")
-plt.show()
+X_train, X_test = X[train_idx], X[test_idx]
+y_train, y_test = y[train_idx], y[test_idx]
 
-#Line-Plot
-plt.plot(df["name"], df["marks"])
-plt.show()
+# BLOCK 3: Standardize the input features
+mean = X_train.mean(axis=0)
+std = X_train.std(axis=0)
+std[std == 0] = 1
 
-# Bar-Chart
-plt.bar(df["name"], df["marks"])
-plt.title("Student Vs Marks")
-plt.show()
+X_train = (X_train - mean) / std
+X_test = (X_test - mean) / std
 
-# Histogram
-plt.hist(df["name"])
-plt.title("Marks")
-plt.show()
+# BLOCK 4: Initialize the model
+weights = np.zeros(X_train.shape[1])
+bias = y_train.mean()
+learning_rate = 0.01
+epochs = 3000
 
-Verification
-- Run only relevant checks (for example, execute the example if the environment supports it).
-- Inspect the final diff and ensure image paths/links resolve.
-- Do not claim that charts were generated or code was tested unless verified.
-Final response
-In at most 5 bullets, state which files changed, what was added, which checks were run, and any remaining limitations.
+# BLOCK 5: Train using gradient descent
+for epoch in range(epochs):
+    predictions = X_train @ weights + bias
+    errors = predictions - y_train
+
+    dw = (2 / len(y_train)) * (X_train.T @ errors)
+    db = 2 * errors.mean()
+
+    weights -= learning_rate * dw
+    bias -= learning_rate * db
+
+# BLOCK 6: Evaluate on unseen test data
+test_predictions = X_test @ weights + bias
+mae = np.mean(np.abs(test_predictions - y_test))
+rmse = np.sqrt(np.mean((test_predictions - y_test) ** 2))
+ss_res = np.sum((y_test - test_predictions) ** 2)
+ss_tot = np.sum((y_test - y_test.mean()) ** 2)
+r2 = 1 - ss_res / ss_tot
+
+print("Test MAE:", round(mae, 2))
+print("Test RMSE:", round(rmse, 2))
+print("Test R²:", round(r2, 3))
+
+# BLOCK 7: Predict for a new student
+student = np.array([[4.5, 90, 75]])
+student_scaled = (student - mean) / std
+score = (student_scaled @ weights + bias)[0]
+
+print("Predicted exam score:", round(float(np.clip(score, 0, 100)), 2))

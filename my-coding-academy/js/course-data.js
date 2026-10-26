@@ -865,21 +865,42 @@ np_marks + 5
 
         <h4>Why This Matters for AIML</h4>
         <p>Machine learning models work with numerical arrays. Learning NumPy now makes it easier to understand datasets, matrices, model inputs, and later concepts such as linear algebra.</p>
+
+        <h3>Practice Exercise: Student Performance Predictor</h3>
+        <p>Use NumPy to build a beginner-friendly multiple linear regression model. The model estimates a student's exam score from study hours, attendance, and previous marks.</p>
+
+        <h4>What You Will Practice</h4>
+        <ul>
+            <li>Create a synthetic dataset with NumPy random functions.</li>
+            <li>Combine feature columns into a two-dimensional feature matrix using <code>np.column_stack()</code>.</li>
+            <li>Split the data into training and testing sets.</li>
+            <li>Standardize features so gradient descent can learn more reliably.</li>
+            <li>Use matrix multiplication with <code>@</code> to make predictions.</li>
+            <li>Evaluate predictions with MAE, RMSE, and R-squared.</li>
+        </ul>
+
+        <h4>How the Model Learns</h4>
+        <p>Gradient descent starts with simple weights, measures prediction errors, and repeatedly adjusts the weights and bias to reduce those errors. The final model is then tested on student data it did not see during training.</p>
+
+        <h4>Challenge</h4>
+        <p>Run the reference solution, then change the new student's study hours, attendance, and previous marks. Observe how the predicted score changes.</p>
         `,
-        description: "Learn the basics of NumPy arrays and use fast numerical operations for data analysis and machine learning.",
+        description: "Learn NumPy arrays and apply them in a beginner multiple linear regression practice project.",
         objectives: [
             "Import the NumPy library",
             "Create one-dimensional and two-dimensional arrays",
             "Use array properties such as shape and dimensions",
-            "Perform basic numerical operations with NumPy"
+            "Perform basic numerical operations with NumPy",
+            "Train and evaluate a simple NumPy regression model"
         ],
         keyPoints: [
             "NumPy arrays store numerical data efficiently",
             "Vectorized operations work on every array value at once",
             "shape describes array rows and columns",
-            "NumPy is used throughout data science and machine learning"
+            "NumPy is used throughout data science and machine learning",
+            "Gradient descent improves model weights by reducing prediction error"
         ],
-        note: "Install NumPy with pip install numpy if it is not already available in your Python environment.",
+        note: "Install NumPy with pip install numpy if it is not already available in your Python environment. The predictor uses synthetic data for practice, so its scores are demonstrations rather than real student results.",
         codeSnippet: `# Day 11: Introduction to NumPy
 import numpy as np
 
@@ -916,6 +937,76 @@ print("2D array shape:", student_data.shape)
 
 # Indexing and slicing
 print("First student's data:", student_data[0])
-print("All marks:", student_data[:, 1])`
+print("All marks:", student_data[:, 1])
+
+# Practice Exercise: Student Performance Predictor
+# Multiple Linear Regression with Gradient Descent
+
+# BLOCK 1: Generate a synthetic student dataset
+np.random.seed(42)
+n = 300
+
+study_hours = np.random.uniform(0, 10, n)
+attendance = np.random.uniform(50, 100, n)
+previous_marks = np.random.uniform(30, 100, n)
+
+X = np.column_stack((study_hours, attendance, previous_marks))
+noise = np.random.normal(0, 5, n)
+y = np.clip(
+    5 * study_hours + 0.2 * attendance
+    + 0.5 * previous_marks + noise, 0, 100
+)
+
+# BLOCK 2: Split data into training and testing sets
+indices = np.random.permutation(n)
+split = int(0.8 * n)
+train_idx, test_idx = indices[:split], indices[split:]
+
+X_train, X_test = X[train_idx], X[test_idx]
+y_train, y_test = y[train_idx], y[test_idx]
+
+# BLOCK 3: Standardize the input features
+mean = X_train.mean(axis=0)
+std = X_train.std(axis=0)
+std[std == 0] = 1
+
+X_train = (X_train - mean) / std
+X_test = (X_test - mean) / std
+
+# BLOCK 4: Initialize the model
+weights = np.zeros(X_train.shape[1])
+bias = y_train.mean()
+learning_rate = 0.01
+epochs = 3000
+
+# BLOCK 5: Train using gradient descent
+for epoch in range(epochs):
+    predictions = X_train @ weights + bias
+    errors = predictions - y_train
+
+    dw = (2 / len(y_train)) * (X_train.T @ errors)
+    db = 2 * errors.mean()
+
+    weights -= learning_rate * dw
+    bias -= learning_rate * db
+
+# BLOCK 6: Evaluate on unseen test data
+test_predictions = X_test @ weights + bias
+mae = np.mean(np.abs(test_predictions - y_test))
+rmse = np.sqrt(np.mean((test_predictions - y_test) ** 2))
+ss_res = np.sum((y_test - test_predictions) ** 2)
+ss_tot = np.sum((y_test - y_test.mean()) ** 2)
+r2 = 1 - ss_res / ss_tot
+
+print("\\nTest MAE:", round(mae, 2))
+print("Test RMSE:", round(rmse, 2))
+print("Test R-squared:", round(r2, 3))
+
+# BLOCK 7: Predict for a new student
+student = np.array([[4.5, 90, 75]])
+student_scaled = (student - mean) / std
+score = (student_scaled @ weights + bias)[0]
+
+print("Predicted exam score:", round(float(np.clip(score, 0, 100)), 2))`
     },
 ];
