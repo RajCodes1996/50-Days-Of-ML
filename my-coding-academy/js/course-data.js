@@ -1009,4 +1009,110 @@ score = (student_scaled @ weights + bias)[0]
 
 print("Predicted exam score:", round(float(np.clip(score, 0, 100)), 2))`
     },
+    {
+        id: "day-12",
+        title: "Day 12: Introduction to Linear Regression",
+        content: `
+        <h3>Introduction to Linear Regression</h3>
+        <p>Linear regression is one of the first machine learning algorithms. It learns a straight-line relationship between an input feature and a target value, then uses that line to make predictions for new data.</p>
+
+        <h4>Our Prediction Problem</h4>
+        <p>We will predict student marks from study hours. Here, <code>X</code> is the input feature (study hours), and <code>y</code> is the target value (student marks).</p>
+
+        <h4>Basic Theory</h4>
+        <p>Linear regression learns an equation in this form: <code>predicted_marks = slope * study_hours + intercept</code>. The slope tells us how much the predicted mark changes for one more hour of study. The intercept is the predicted mark when study hours are zero.</p>
+
+        <h4>Learning Steps</h4>
+        <ul>
+            <li>Create a two-dimensional input array because scikit-learn expects features in columns.</li>
+            <li>Visualize the study-hours and marks data with a scatter plot.</li>
+            <li>Create <code>LinearRegression()</code> and train it with <code>model.fit(X, y)</code>.</li>
+            <li>Inspect the learned slope and intercept.</li>
+            <li>Predict marks for a new student who studies 7 hours.</li>
+            <li>Draw the regression line over the original data points.</li>
+        </ul>
+
+        <h4>Visualization Preview</h4>
+        <svg viewBox="0 0 560 300" role="img" aria-label="Scatter plot and regression line showing study hours and student marks" style="width:100%; max-width:680px; background:#090d16; border:1px solid #1e293b; border-radius:8px; padding:14px;">
+            <text x="150" y="28" fill="#f8fafc" font-size="18" font-weight="700">Study Hours vs Student Marks</text>
+            <line x1="65" y1="240" x2="505" y2="240" stroke="#94a3b8" stroke-width="2"></line>
+            <line x1="65" y1="240" x2="65" y2="46" stroke="#94a3b8" stroke-width="2"></line>
+            <line x1="90" y1="220" x2="470" y2="70" stroke="#f59e0b" stroke-width="3"></line>
+            <circle cx="120" cy="208" r="7" fill="#00d2ff"></circle><circle cx="190" cy="178" r="7" fill="#00d2ff"></circle><circle cx="260" cy="148" r="7" fill="#00d2ff"></circle><circle cx="330" cy="118" r="7" fill="#00d2ff"></circle><circle cx="400" cy="88" r="7" fill="#00d2ff"></circle><circle cx="470" cy="58" r="7" fill="#00d2ff"></circle>
+            <text x="235" y="282" fill="#cbd5e1" font-size="15">Study Hours</text>
+            <text x="18" y="165" fill="#cbd5e1" font-size="15" transform="rotate(-90 25 165)">Student Marks</text>
+            <text x="105" y="260" fill="#94a3b8" font-size="12">1</text><text x="175" y="260" fill="#94a3b8" font-size="12">2</text><text x="245" y="260" fill="#94a3b8" font-size="12">3</text><text x="315" y="260" fill="#94a3b8" font-size="12">4</text><text x="385" y="260" fill="#94a3b8" font-size="12">5</text><text x="455" y="260" fill="#94a3b8" font-size="12">6</text>
+            <text x="42" y="212" fill="#94a3b8" font-size="12">20</text><text x="42" y="152" fill="#94a3b8" font-size="12">40</text><text x="42" y="92" fill="#94a3b8" font-size="12">60</text>
+            <rect x="355" y="38" width="120" height="25" fill="#111827" rx="3"></rect><line x1="365" y1="51" x2="390" y2="51" stroke="#f59e0b" stroke-width="3"></line><text x="398" y="56" fill="#cbd5e1" font-size="12">Regression line</text>
+        </svg>
+
+        <h4>How to Interpret the Graph</h4>
+        <p>The blue dots are actual student records. The orange line is the model's best-fit line. A point close to the line has a small prediction error; points far from the line have a larger error. A straight line is useful only when the real relationship is approximately linear.</p>
+        `,
+        description: "Learn the basic theory of linear regression and build a study-hours to marks prediction model with scikit-learn.",
+        objectives: [
+            "Understand features, targets, slope, and intercept",
+            "Train a LinearRegression model with fit()",
+            "Predict marks for a new student",
+            "Visualize actual data and the learned regression line"
+        ],
+        keyPoints: [
+            "X contains input features and y contains target values",
+            "fit() learns the slope and intercept from training data",
+            "predict() estimates targets for new feature values",
+            "The regression line summarizes a linear trend, not a guarantee"
+        ],
+        note: "Install scikit-learn with pip install scikit-learn if it is not available. This tiny, perfectly linear dataset is designed for learning; real datasets usually include more variation.",
+        codeSnippet: `# Day 12: Linear Regression - Student Marks Prediction
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+# STEP 1: Create the dataset
+# X must be 2D: each inner list represents one student's study hours.
+X = np.array([[1], [2], [3], [4], [5], [6]])
+y = np.array([20, 30, 40, 50, 60, 70])
+
+print("Study Hours:")
+print(X)
+print("\\nStudent Marks:")
+print(y)
+print("\\nDataset Shape:")
+print("X:", X.shape)
+print("y:", y.shape)
+
+# STEP 2: Visualize the original dataset
+plt.scatter(X, y, color="deepskyblue", label="Actual data")
+plt.xlabel("Study Hours")
+plt.ylabel("Student Marks")
+plt.title("Study Hours vs Student Marks")
+plt.legend()
+plt.show()
+
+# STEP 3 and 4: Create and train the model
+model = LinearRegression()
+model.fit(X, y)
+
+# STEP 5: Inspect what the model learned
+print("\\nModel Learning Results:")
+print("Slope:", model.coef_[0])
+print("Intercept:", model.intercept_)
+
+# STEP 6: Predict marks for a new student
+new_student = np.array([[7]])
+predicted_marks = model.predict(new_student)
+
+print("\\nPrediction:")
+print("Study Hours:", new_student[0][0])
+print("Predicted Marks:", predicted_marks[0])
+
+# STEP 7: Visualize the regression line
+plt.scatter(X, y, color="deepskyblue", label="Actual data")
+plt.plot(X, model.predict(X), color="orange", label="Regression line")
+plt.xlabel("Study Hours")
+plt.ylabel("Student Marks")
+plt.title("Linear Regression - Student Marks Prediction")
+plt.legend()
+plt.show()`
+    },
 ];
